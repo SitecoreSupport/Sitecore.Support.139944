@@ -1,5 +1,6 @@
 # Sitecore.Support.139944
-Fixes incorrect updating of the _latestversion property when the intervalAsyncMaster strategy is used for a Lucene or Solr index
+The `_latestversion` property may be updated incorrectly when the `intervalAsyncMaster` strategy is used for a `Lucene` or `Solr` index.<br/>
+This patch fixes the described behavior.
 
 ## License  
 This patch is licensed under the [Sitecore Corporation A/S License for GitHub](https://github.com/sitecoresupport/Sitecore.Support.139944/blob/master/LICENSE).  
