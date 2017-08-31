@@ -206,7 +206,6 @@ namespace Sitecore.Support.ContentSearch.Maintenance.Strategies
         {
             var indexableListToUpdate = new DataUriBucketDictionary<IndexableInfo>();
             var indexableListToRemove = new DataUriBucketDictionary<IndexableInfo>();
-            var indexableListToAddVersion = new DataUriBucketDictionary<IndexableInfo>();
 
             foreach (var queuedEvent in queue)
             {
@@ -227,7 +226,7 @@ namespace Sitecore.Support.ContentSearch.Maintenance.Strategies
                 }
                 else if (instanceData is AddedVersionRemoteEvent)
                 {
-                    this.HandleIndexableToAddVersion(indexableListToAddVersion, key, indexable);
+                    this.HandleIndexableToAddVersion(indexableListToUpdate, key, indexable);
                 }
                 else
                 {
@@ -238,7 +237,6 @@ namespace Sitecore.Support.ContentSearch.Maintenance.Strategies
 
             return indexableListToUpdate.ExtractValues()
               .Concat(indexableListToRemove.ExtractValues())
-              .Concat(indexableListToAddVersion.ExtractValues())
               .OrderBy(x => x.Timestamp).ToList();
         }
 
@@ -402,6 +400,11 @@ namespace Sitecore.Support.ContentSearch.Maintenance.Strategies
             if (!collection.ContainsKey(key))
             {
                 collection.Add(key, indexable);
+            }
+            else
+            {
+                collection[key].Timestamp = indexable.Timestamp;
+                collection[key].IsVersionAdded = true;
             }
         }
 
