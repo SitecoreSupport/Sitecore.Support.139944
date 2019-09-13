@@ -25,30 +25,9 @@ namespace Sitecore.Support.ContentSearch.Maintenance.Strategies
     public abstract partial class BaseAsynchronousStrategy : IIndexUpdateStrategy
     {
         /// <summary>
-        /// The sync root object.
-        /// </summary>
-        private readonly object syncRoot = new object();
-
-        /// <summary>
         /// Determines if strategy initialized
         /// </summary>
         private volatile int initialized;
-
-        private ParallelDisabledSecurityProxy parallelDisabledSecurityProxy;
-
-        /// <summary>
-        /// Gets the parallel foreach proxy.
-        /// </summary>
-        /// <value>
-        /// The parallel foreach proxy.
-        /// </value>
-        protected virtual ParallelDisabledSecurityProxy ParallelForeachProxy
-        {
-            get
-            {
-                return this.parallelDisabledSecurityProxy = this.parallelDisabledSecurityProxy ?? new ParallelDisabledSecurityProxy();
-            }
-        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BaseAsynchronousStrategy"/> class.
